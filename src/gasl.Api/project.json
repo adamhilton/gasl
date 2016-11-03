@@ -50,6 +50,6 @@
   },
 
   "tooling": {
-    "defaultNamespace": "gasl"
+    "defaultNamespace": "gasl.Api"
   }
 }
