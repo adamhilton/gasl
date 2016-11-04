@@ -1,13 +1,13 @@
+using gasl.Web.Core.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using gasl.Web.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace gasl.Web.Domain
+namespace gasl.Web.Infrastructure.Data
 {
     public class UserContext : IdentityDbContext<User>
     {
         public UserContext() {}
-        public UserContext(DbContextOptions<gaslUserContext> options)
+        public UserContext(DbContextOptions<UserContext> options)
             : base(options)
         {
         }

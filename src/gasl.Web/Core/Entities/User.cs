@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace gasl.Web.Domain.Entities
+namespace gasl.Web.Core.Entities
 {
     public class User : IdentityUser 
     {
