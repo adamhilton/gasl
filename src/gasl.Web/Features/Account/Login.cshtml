@@ -1,0 +1,38 @@
+@model gasl.Web.Features.Account.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="row">
+
+    <div class="col-xs-12 text-center"><h2>Login</h2></div>
+
+    <div>
+        <form method="post" asp-controller="account" asp-action="login" asp-route-returnurl="@Model.ReturnUrl">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div>
+                <label asp-for="Username"></label>
+                <input asp-for="Username">
+            </div>
+            <div>
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="Password"></label>
+                <input asp-for="Password">
+            </div>
+            <div>
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <label asp-for="RememberMe"></label>
+                <input asp-for="RememberMe">
+            </div>
+            <div>
+                <span asp-validation-for="RememberMe" class="text-danger"></span>
+            </div>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>

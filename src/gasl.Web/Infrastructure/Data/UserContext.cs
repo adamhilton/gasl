@@ -16,9 +16,5 @@ namespace gasl.Web.Infrastructure.Data
         {
             base.OnConfiguring(optionsBuilder);
         }
-
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-        }
     }
 }

@@ -1,4 +1,4 @@
-public namespace gasl.Domain.Entities
+namespace gasl.Domain.Entities
 {
     public class Link
     {
