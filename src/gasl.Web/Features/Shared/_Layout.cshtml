@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - gasl</title>
+
+	<environment names="Development">
+
+	</environment>
+	<environment names="Staging,Production">
+
+	</environment>
+</head>
+
+<body class="container">
+
+	<div class="body-content">
+        @RenderBody()
+	</div>
+
+	<environment names="Development">
+	</environment>
+	<environment names="Staging,Production">
+	</environment>
+
+	@RenderSection("scripts", required: false)
+</body>
+
+</html>
