@@ -47,9 +47,19 @@ namespace gasl.Api
                 .AddDefaultTokenProviders();
 
             services.AddMvcWithFeatureRouting();
+
+            services.AddSingleton(_ => Configuration);
+
+            services.AddTransient<SeedData>();
+
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            SeedData seedData
+        )
         {
             loggerFactory.AddConsole();
 
@@ -65,6 +75,9 @@ namespace gasl.Api
             app.UseCookieAuthentication(GetCookieAuthenticationConfiguration());
 
             app.UseMvc(ConfigureRoutes);
+
+            await seedData.InitializeAsync();
+
         }
 
         private static CookieAuthenticationOptions GetCookieAuthenticationConfiguration()
