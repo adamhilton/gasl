@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace gasl.Mvc
 {
-    public static class Features 
+    public static class FeatureRouting 
     {
         public static void AddMvcWithFeatureRouting(this IServiceCollection services)
         {
