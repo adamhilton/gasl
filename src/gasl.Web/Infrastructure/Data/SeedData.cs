@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using gasl.Web.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using gasl.Domain.Entities;
 
 namespace gasl.Web.Infrastructure.Data
 {
@@ -24,10 +26,12 @@ namespace gasl.Web.Infrastructure.Data
 
         public async Task InitializeAsync()
         {
-            if (true)
+            if (NoUsersExist())
             {
                 await CreateAdminAsync();
             }
+
+            await CreateLinks();
         }
 
         private async Task CreateAdminAsync()
@@ -50,6 +54,20 @@ namespace gasl.Web.Infrastructure.Data
                 UserName = userName
             }, password);
             _ctx.SaveChanges();
+        }
+
+        private async Task CreateLinks() 
+        {
+            HashSet<Link> links = new HashSet<Link>();
+            for (int i = 0; i < 5; i ++)
+            {
+                var link = new Link
+                {
+                    Id = i.ToString(),
+                    Url = ""
+                };
+                links.Add(link);
+            }
         }
 
         private bool NoUsersExist()

@@ -7,11 +7,12 @@
 	<title>@ViewData["Title"] - gasl</title>
 
 	<environment names="Development">
-
+		<link rel="stylesheet" href="~/css/site.css" />
 	</environment>
 	<environment names="Staging,Production">
-
+		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 	</environment>
+	
 </head>
 
 <body class="container">
@@ -21,8 +22,10 @@
 	</div>
 
 	<environment names="Development">
+		<script src="~/js/site.js"></script>
 	</environment>
 	<environment names="Staging,Production">
+		<script src="~/js/site.js" asp-append-version="true"></script>
 	</environment>
 
 	@RenderSection("scripts", required: false)
