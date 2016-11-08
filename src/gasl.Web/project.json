@@ -7,6 +7,7 @@
     
     "gasl.Mvc" : "1.0.0-*",
     "gasl.Domain" : "1.0.0-*",
+    "gasl.Infrastructure": "1.0.0-*",
 
     "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
     "Microsoft.AspNetCore.Diagnostics": "1.0.0",

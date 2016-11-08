@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using gasl.Web.Core.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using gasl.Domain.Entities;
+using gasl.Infrastructure.Data;
 
 namespace gasl.Web.Infrastructure.Data
 {
@@ -14,14 +14,17 @@ namespace gasl.Web.Infrastructure.Data
         private readonly UserContext _ctx;
         private readonly UserManager<User> _userManager;
         private readonly IConfigurationRoot _configuration;
+        private readonly LinkRepository _linkRepo;
 
         public SeedData(UserContext ctx,
             UserManager<User> userManager,
-            IConfigurationRoot configuration)
+            IConfigurationRoot configuration,
+            LinkRepository linkRepo)
         {
             _ctx = ctx;
             _userManager = userManager;
             _configuration = configuration;
+            _linkRepo = linkRepo;
         }
 
         public async Task InitializeAsync()
@@ -58,15 +61,13 @@ namespace gasl.Web.Infrastructure.Data
 
         private async Task CreateLinks() 
         {
-            HashSet<Link> links = new HashSet<Link>();
             for (int i = 0; i < 5; i ++)
             {
                 var link = new Link
                 {
-                    Id = i.ToString(),
-                    Url = ""
+                    Url = "adamhilton.net"
                 };
-                links.Add(link);
+                _linkRepo.Add(link);
             }
         }
 

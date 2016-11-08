@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace gasl.Infrastructure.Data
         protected readonly DbSet<Link> _dbSet;
         protected readonly LinkContext _dbContext;
 
-        protected LinkRepository(LinkContext dbContext)
+        public LinkRepository(LinkContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Links;
@@ -19,9 +20,21 @@ namespace gasl.Infrastructure.Data
 
         public Link Add(Link entity)
         {
+            entity.Id = generateLinkId();
+
             _dbSet.Add(entity);
             _dbContext.SaveChanges();
             return entity;
+        }
+
+        private static Random random = new Random();
+
+        private const int LinkIdLength = 7;
+
+        private string generateLinkId() {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, LinkIdLength)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         public void Delete(Link entity)
