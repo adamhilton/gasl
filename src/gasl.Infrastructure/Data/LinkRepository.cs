@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using gasl.Domain.Entities;
+using gasl.Infrastructure.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace gasl.Infrastructure.Data
@@ -20,22 +20,13 @@ namespace gasl.Infrastructure.Data
 
         public Link Add(Link entity)
         {
-            entity.Id = generateLinkId();
+            entity.Id = RandomCharacterGenerator.GetCharacters(7);
 
             _dbSet.Add(entity);
             _dbContext.SaveChanges();
             return entity;
         }
 
-        private static Random random = new Random();
-
-        private const int LinkIdLength = 7;
-
-        private string generateLinkId() {
-            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, LinkIdLength)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
 
         public void Delete(Link entity)
         {
