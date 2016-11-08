@@ -32,7 +32,7 @@ namespace gasl.Infrastructure.Data
         private const int LinkIdLength = 7;
 
         private string generateLinkId() {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, LinkIdLength)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
