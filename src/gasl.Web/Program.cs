@@ -1,6 +1,6 @@
 using System.IO;
+using gasl.Web;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 
 namespace gasl.Api
 {

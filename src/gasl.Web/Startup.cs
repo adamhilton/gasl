@@ -10,8 +10,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using gasl.Web.Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using gasl.Infrastructure.Data;
 
-namespace gasl.Api
+namespace gasl.Web
 {
     public class Startup
     {
@@ -39,8 +40,11 @@ namespace gasl.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options =>
-                options.UseInMemoryDatabase());
+            services
+                .AddDbContext<UserContext>(options =>
+                    options.UseInMemoryDatabase())
+                .AddDbContext<LinkContext>(options =>
+                    options.UseInMemoryDatabase());
 
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<UserContext>()
@@ -49,6 +53,8 @@ namespace gasl.Api
             services.AddMvcWithFeatureRouting();
 
             services.AddSingleton(_ => Configuration);
+
+            services.AddScoped<LinkRepository>();
 
             services.AddTransient<SeedData>();
 

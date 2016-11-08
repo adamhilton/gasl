@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using gasl.Domain.Entities;
+using gasl.Infrastructure.Core.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace gasl.Infrastructure.Data
@@ -11,7 +12,7 @@ namespace gasl.Infrastructure.Data
         protected readonly DbSet<Link> _dbSet;
         protected readonly LinkContext _dbContext;
 
-        protected LinkRepository(LinkContext dbContext)
+        public LinkRepository(LinkContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Links;
@@ -19,10 +20,13 @@ namespace gasl.Infrastructure.Data
 
         public Link Add(Link entity)
         {
+            entity.Id = RandomCharacterGenerator.GetCharacters(7);
+
             _dbSet.Add(entity);
             _dbContext.SaveChanges();
             return entity;
         }
+
 
         public void Delete(Link entity)
         {
