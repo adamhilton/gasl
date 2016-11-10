@@ -1,0 +1,12 @@
+@model List<gasl.Domain.Entities.Link>
+
+<ul>
+    @foreach(var item in Model) 
+    {
+        <li>
+            @item.Id 
+            -
+            @item.Url
+        </li>
+    }
+</ul>

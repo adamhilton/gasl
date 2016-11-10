@@ -2,13 +2,13 @@
 
 <h1>Welcome to gasl!</h1>
 
-<ul>
-    @foreach(var item in Model) 
-    {
-        <li>
-            @item.Id 
-            -
-            @item.Url
-        </li>
-    }
-</ul>
+<form asp-controller="Admin" asp-action="AddLink" data-ajax="true" data-ajax-method="POST" data-ajax-mode="replace" data-ajax-update="#content">
+
+    <input type="text" name="link">
+    <input type="submit" value="add"/>
+    
+</form>
+
+<div id="content">
+    @Html.Partial("_Links", Model)
+</div>

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using gasl.Domain.Entities;
 using gasl.Infrastructure.Data;
@@ -22,6 +23,14 @@ namespace gasl.Web.Features.Admin
         {
             List<Link> links = _linkRepo.List();
             return View(links);
+        }
+
+        [HttpPost]
+        public IActionResult AddLink(String link)
+        {
+            _linkRepo.Add(new Link { Url = link });
+            var links = _linkRepo.List();
+            return PartialView("_Links", links);
         }
     }
 }
