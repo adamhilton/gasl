@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 using gasl.Mvc;
+using gasl.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Routing;
+using gasl.Web.Infrastructure.Data;
 
 namespace gasl.Api
 {
@@ -13,9 +16,20 @@ namespace gasl.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcWithFeatureRouting();
+
+            services.AddDbContext<LinkContext>(options =>
+                    options.UseInMemoryDatabase());
+
+            services.AddScoped<LinkRepository>();
+
+            services.AddTransient<SeedData>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public async void Configure(
+            IApplicationBuilder app,
+            IHostingEnvironment env, 
+            ILoggerFactory loggerFactory,
+            SeedData seedData)
         {
             loggerFactory.AddConsole();
 
@@ -24,10 +38,16 @@ namespace gasl.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc(ConfigureRoutes);
+
+            await seedData.InitializeAsync();
+        }
+
+        private static void ConfigureRoutes(IRouteBuilder routeBuilder)
+        {
+            routeBuilder.MapRoute(
+                name: "default",
+                template: "{controller=home}/{action=index}/{id?}");
         }
     }
 }

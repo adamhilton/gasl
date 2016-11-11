@@ -27,7 +27,6 @@ namespace gasl.Infrastructure.Data
             return entity;
         }
 
-
         public void Delete(Link entity)
         {
             _dbSet.Remove(entity);
